@@ -8,7 +8,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
-use Spatie\NovaTranslatable\Translatable;
+use App\Nova\Fields\Translatable;
 
 class User extends Resource
 {
@@ -65,6 +65,12 @@ class User extends Resource
 
             Translatable::make([
                 Trix::make('Biography')->withFiles('public'),
+            ])->rulesFor([
+                'biography' => [
+                    'en' => ['min:10'],
+                    'om' => ['min:20'],
+                    'am' => ['min:30'],
+                ]
             ]),
         ];
     }
