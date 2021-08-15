@@ -2,13 +2,14 @@
 
 namespace App\Nova;
 
+use Froala\NovaFroalaField\Froala;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Trix;
-use App\Nova\Fields\Translatable;
+//use Spatie\NovaTranslatable\Translatable;
+use \App\Nova\Fields\Translatable;
 
 class User extends Resource
 {
@@ -64,13 +65,7 @@ class User extends Resource
                 ->updateRules('nullable', 'string', 'min:8'),
 
             Translatable::make([
-                Trix::make('Biography')->withFiles('public'),
-            ])->rulesFor([
-                'biography' => [
-                    'en' => ['min:10'],
-                    'om' => ['min:20'],
-                    'am' => ['min:30'],
-                ]
+                Froala::make('Biography')->withFiles('public'),
             ]),
         ];
     }
